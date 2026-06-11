@@ -1,0 +1,430 @@
+/* ========================================
+   siyuan-docx-editor — Aesthetic Styles
+   Uses SiYuan CSS variables for consistency
+   ======================================== */
+
+/* ---- Container ---- */
+
+/* Container fills parent via JS-set inline styles on b3-dialog__content */
+.siyuan-docx-editor__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.siyuan-docx-editor__root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ---- Toolbar ---- */
+
+.siyuan-docx-editor__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--b3-theme-surface-lighter);
+    background: var(--b3-theme-surface);
+    flex-shrink: 0;
+    min-height: 42px;
+}
+
+.siyuan-docx-editor__toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.siyuan-docx-editor__toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+/* Toolbar group separator */
+.siyuan-docx-editor__toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--b3-theme-surface-lighter);
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+/* ---- File name input ---- */
+
+.siyuan-docx-editor__filename {
+    min-width: 180px;
+    max-width: 360px;
+    font-size: 13px !important;
+    font-weight: 500;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.siyuan-docx-editor__filename:hover {
+    border-color: var(--b3-theme-surface-lighter) !important;
+    background: var(--b3-theme-background) !important;
+}
+
+.siyuan-docx-editor__filename:focus {
+    border-color: var(--b3-theme-primary) !important;
+    background: var(--b3-theme-background) !important;
+    box-shadow: 0 0 0 2px var(--b3-theme-primary-lightest) !important;
+}
+
+/* ---- Toolbar buttons ---- */
+
+.siyuan-docx-editor__toolbar .b3-button {
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.15s ease, opacity 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.siyuan-docx-editor__toolbar .b3-button svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* Icon-only button variant */
+.siyuan-docx-editor__btn-icon {
+    padding: 5px !important;
+    min-width: 28px;
+    justify-content: center;
+}
+
+.siyuan-docx-editor__btn-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---- Mode switch (segmented control) ---- */
+
+.siyuan-docx-editor__mode-switch {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--b3-theme-surface-lighter);
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--b3-theme-background);
+}
+
+.siyuan-docx-editor__mode-switch button {
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    background: transparent;
+    color: var(--b3-theme-on-surface-light);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    position: relative;
+    white-space: nowrap;
+}
+
+.siyuan-docx-editor__mode-switch button:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--b3-theme-surface-lighter);
+}
+
+.siyuan-docx-editor__mode-switch button:hover {
+    background: var(--b3-theme-surface-hover);
+    color: var(--b3-theme-on-surface);
+}
+
+.siyuan-docx-editor__mode-switch button.b3-button--outline {
+    background: var(--b3-theme-primary);
+    color: var(--b3-theme-on-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.siyuan-docx-editor__mode-switch button.b3-button--outline::after {
+    display: none;
+}
+
+/* Mode indicator dot */
+.siyuan-docx-editor__mode-indicator {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.siyuan-docx-editor__mode-indicator--editing {
+    background: #4caf50;
+}
+
+.siyuan-docx-editor__mode-indicator--suggesting {
+    background: #ff9800;
+}
+
+/* ---- Editor area ---- */
+
+.siyuan-docx-editor__editor {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    position: relative;
+    background: #fff;
+}
+
+/* If SiYuan is in dark mode, use a slightly off-white for the editor area */
+ body.theme--dark .siyuan-docx-editor__editor {
+    background: #1e1e1e;
+}
+
+/* ---- Docx-Editor React overrides ---- */
+
+/* Ensure docx-editor fills container and scrolls properly */
+.siyuan-docx-editor__editor .docx-editor {
+    min-height: 100%;
+}
+
+/* Override docx-editor's root CSS variables to prevent dark/black backgrounds */
+.siyuan-docx-editor__editor .ep-root {
+    --doc-bg: #f8f9fa;
+    --doc-text: #202124;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --doc-primary: #1a73e8;
+    --doc-border: #e0e0e0;
+    --doc-border-light: #dadce0;
+    --doc-text-muted: #5f6368;
+    --doc-bg-subtle: #f5f5f5;
+    --doc-bg-hover: #f1f3f4;
+    background: #f8f9fa;
+}
+
+/* In dark mode, adjust docx-editor colors */
+body.theme--dark .siyuan-docx-editor__editor .ep-root {
+    --doc-bg: #1e1e1e;
+    --doc-text: #e0e0e0;
+    --background: 0 0% 12%;
+    --foreground: 210 40% 90%;
+    --doc-primary: #64b5f6;
+    --doc-border: #444;
+    --doc-border-light: #555;
+    --doc-text-muted: #aaa;
+    --doc-bg-subtle: #2a2a2a;
+    --doc-bg-hover: #333;
+    background: #1e1e1e;
+}
+
+/* Fix page canvas background */
+.siyuan-docx-editor__editor .ep-root .bg-doc-bg {
+    background-color: var(--doc-bg);
+}
+
+/* Override any slate-900 that might cause black areas */
+.siyuan-docx-editor__editor .ep-root .bg-slate-900 {
+    background-color: var(--doc-bg) !important;
+}
+
+/* ---- Loading state ---- */
+
+.siyuan-docx-editor__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+    color: var(--b3-theme-on-surface-light);
+    font-size: 14px;
+}
+
+.siyuan-docx-editor__loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--b3-theme-surface-lighter);
+    border-top-color: var(--b3-theme-primary);
+    border-radius: 50%;
+    animation: siyuan-docx-spin 0.8s linear infinite;
+}
+
+@keyframes siyuan-docx-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Status bar ---- */
+
+.siyuan-docx-editor__statusbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    border-top: 1px solid var(--b3-theme-surface-lighter);
+    background: var(--b3-theme-surface);
+    font-size: 11px;
+    color: var(--b3-theme-on-surface);
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 24px;
+    line-height: 24px;
+}
+
+.siyuan-docx-editor__statusbar-left,
+.siyuan-docx-editor__statusbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ---- Picker dialog ---- */
+
+.siyuan-docx-editor__picker {
+    padding: 20px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Card-style picker section */
+.siyuan-docx-editor__picker-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid var(--b3-theme-surface-lighter);
+    border-radius: 8px;
+    background: var(--b3-theme-background);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+}
+
+.siyuan-docx-editor__picker-card:hover {
+    border-color: var(--b3-theme-primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.siyuan-docx-editor__picker-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--b3-theme-primary-lightest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.siyuan-docx-editor__picker-card-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--b3-theme-primary);
+}
+
+.siyuan-docx-editor__picker-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.siyuan-docx-editor__picker-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--b3-theme-on-surface);
+    margin-bottom: 2px;
+}
+
+.siyuan-docx-editor__picker-card-desc {
+    font-size: 12px;
+    color: var(--b3-theme-on-surface-light);
+    line-height: 1.4;
+}
+
+/* Direct section (non-card) */
+.siyuan-docx-editor__picker-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px 0;
+}
+
+.siyuan-docx-editor__picker-section > label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--b3-theme-on-surface-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Divider */
+.siyuan-docx-editor__picker-divider {
+    height: 1px;
+    background: var(--b3-theme-surface-lighter);
+    margin: 4px 0;
+}
+
+/* Picker buttons */
+.siyuan-docx-editor__picker .b3-button {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 5px;
+}
+
+/* Picker text field */
+.siyuan-docx-editor__picker .b3-text-field {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+/* ---- Responsive tweaks ---- */
+
+@media (max-width: 640px) {
+    .siyuan-docx-editor__toolbar {
+        flex-wrap: wrap;
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .siyuan-docx-editor__toolbar-left {
+        flex: 1 1 100%;
+        order: 2;
+    }
+
+    .siyuan-docx-editor__toolbar-right {
+        flex: 1 1 100%;
+        order: 1;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .siyuan-docx-editor__filename {
+        min-width: 120px;
+        max-width: 100%;
+    }
+
+    .siyuan-docx-editor__picker {
+        padding: 16px;
+    }
+
+    .siyuan-docx-editor__picker-card {
+        padding: 12px;
+        gap: 12px;
+    }
+}

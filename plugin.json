@@ -1,0 +1,46 @@
+{
+    "_note": "插件文件夹名必须与此 name 字段完全一致！否则思源不会加载此插件。",
+    "name": "siyuan-docx-editor",
+    "author": "Raing5Days",
+    "url": "https://github.com/Raing5Days/siyuan-docx-editor",
+    "version": "0.2.0",
+    "minAppVersion": "3.6.4",
+    "backends": [
+        "windows",
+        "linux",
+        "darwin",
+        "all"
+    ],
+    "frontends": [
+        "desktop",
+        "desktop-window",
+        "all"
+    ],
+    "disabledInPublish": true,
+    "displayName": {
+        "default": "DOCX Editor",
+        "zh_CN": "DOCX 编辑器"
+    },
+    "description": {
+        "default": "WYSIWYG .docx editor for SiYuan — open, edit, and save Word attachments directly in the browser",
+        "zh_CN": "在思源笔记中直接打开并编辑 .docx 附件，所见即所得"
+    },
+    "readme": {
+        "default": "README.md",
+        "zh_CN": "README_zh_CN.md"
+    },
+    "funding": {
+        "openCollective": "",
+        "patreon": "",
+        "github": "https://github.com/Raing5Days",
+        "custom": []
+    },
+    "keywords": [
+        "docx",
+        "word",
+        "editor",
+        "WYSIWYG",
+        "附件编辑",
+        "文档编辑"
+    ]
+}
